@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="BPELColegioCA" xmlns:ns2="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" xmlns:ns3="http://serviciosSW/" xmlns:ns4="http://enterprise.netbeans.org/bpel/BPELColegio/BPELColegio" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="casaPort1" interface-name="ns2:InvokeColegioEstudiantePortType" name="endpoint1" service-name="ns1:BPELColegioCAService1"/>
+        <endpoint endpoint-name="ServicioColegioNombreSWPort" interface-name="ns3:ServicioColegioNombreSW" name="endpoint2" service-name="ns3:ServicioColegioNombreSWService"/>
+        <endpoint endpoint-name="ServicioColegioNotaSWPort" interface-name="ns3:ServicioColegioNotaSW" name="endpoint3" service-name="ns3:ServicioColegioNotaSWService"/>
+        <endpoint display-name="PartnerLink1" endpoint-name="InvokeColegioEstudiantePortTypeRole_myRole" file-path="BPELColegio.bpel" interface-name="ns2:InvokeColegioEstudiantePortType" name="endpoint4" process-name="BPELColegio" service-name="ns4:PartnerLink1"/>
+        <endpoint display-name="PartnerLink2" endpoint-name="ServicioColegioNombreSWRole_partnerRole" file-path="BPELColegio.bpel" interface-name="ns3:ServicioColegioNombreSW" name="endpoint5" process-name="BPELColegio" service-name="ns4:PartnerLink2"/>
+        <endpoint display-name="PartnerLink3" endpoint-name="ServicioColegioNotaSWRole_partnerRole" file-path="BPELColegio.bpel" interface-name="ns3:ServicioColegioNotaSW" name="endpoint6" process-name="BPELColegio" service-name="ns4:PartnerLink3"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="BPELColegio.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="BPELColegioCA-BPELColegio" unit-name="BPELColegio" unknown="false" x="104" y="277">
+            <provides endpoint="endpoint4"/>
+            <consumes endpoint="endpoint5"/>
+            <consumes endpoint="endpoint6"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="BPELColegioCA-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port bindingType="soap" x="67" y="322">
+                    <link xlink:href="../jbiasa/BPELColegioCA.wsdl#xpointer(/definitions/service[@name='BPELColegioCAService1']/port[@name='casaPort1'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+                <port x="67" y="172">
+                    <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort.wsdl#xpointer(/definitions/service[@name='ServicioColegioNombreSWService']/port[@name='ServicioColegioNombreSWPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+                <port x="67" y="39">
+                    <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort.wsdl#xpointer(/definitions/service[@name='ServicioColegioNotaSWService']/port[@name='ServicioColegioNotaSWPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint3"/>
+                    <provides endpoint="endpoint3"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint6" mode="" provider="endpoint3" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint1" mode="" provider="endpoint4" route-type="direct" routing-rule="" state="new"/>
+        <connection consumer="endpoint5" mode="" provider="endpoint2" route-type="" routing-rule="" state="unchanged"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiasa/BPELColegioCA.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort.wsdl#xpointer(/definitions/portType[@name='ServicioColegioNombreSW'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort.wsdl#xpointer(/definitions/portType[@name='ServicioColegioNotaSW'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegio/InvokeColegioEstudiante.wsdl#xpointer(/definitions/portType[@name='InvokeColegioEstudiantePortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegioCA.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiasa/BPELColegioCA.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort.wsdl#xpointer(/definitions/binding[@name='ServicioColegioNombreSWPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort.wsdl#xpointer(/definitions/binding[@name='ServicioColegioNotaSWPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegioCA.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiasa/BPELColegioCA.wsdl#xpointer(/definitions/service[@name='BPELColegioCAService1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort.wsdl#xpointer(/definitions/service[@name='ServicioColegioNombreSWService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort.wsdl#xpointer(/definitions/service[@name='ServicioColegioNotaSWService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BPELColegioCA.wsdl#xpointer(/definitions/service[@name='BPELColegioCAService1'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>

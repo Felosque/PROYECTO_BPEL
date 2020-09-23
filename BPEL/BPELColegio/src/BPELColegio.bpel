@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process
+    name="BPELColegio"
+    targetNamespace="http://enterprise.netbeans.org/bpel/BPELColegio/BPELColegio"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/BPELColegio/BPELColegio"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling">
+    <import namespace="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" location="InvokeColegioEstudiante.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/ServicioColegioNombreSWPortWrapper" location="ServicioColegioNombreSWPortWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://serviciosSW/" location="http://192.168.16.12:7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/ServicioColegioNotaSWPortWrapper" location="ServicioColegioNotaSWPortWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://serviciosSW/" location="http://192.168.16.12:7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="PartnerLink2" xmlns:tns="http://enterprise.netbeans.org/bpel/ServicioColegioNombreSWPortWrapper" partnerLinkType="tns:ServicioColegioNombreSWLinkType" partnerRole="ServicioColegioNombreSWRole"/>
+        <partnerLink name="PartnerLink3" xmlns:tns="http://enterprise.netbeans.org/bpel/ServicioColegioNotaSWPortWrapper" partnerLinkType="tns:ServicioColegioNotaSWLinkType" partnerRole="ServicioColegioNotaSWRole"/>
+        <partnerLink name="PartnerLink1" xmlns:tns="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" partnerLinkType="tns:InvokeColegioEstudiante" myRole="InvokeColegioEstudiantePortTypeRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="DarNotaEstudianteOut" xmlns:tns="http://serviciosSW/" messageType="tns:darNotaEstudianteResponse"/>
+        <variable name="DarNotaEstudianteIn" xmlns:tns="http://serviciosSW/" messageType="tns:darNotaEstudiante"/>
+        <variable name="DarNombreEstudianteOut" xmlns:tns="http://serviciosSW/" messageType="tns:darNombreEstudianteResponse"/>
+        <variable name="DarNombreEstudianteIn" xmlns:tns="http://serviciosSW/" messageType="tns:darNombreEstudiante"/>
+        <variable name="InvokeColegioEstudianteOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" messageType="tns:InvokeColegioEstudianteOperationResponse"/>
+        <variable name="InvokeColegioEstudianteOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" messageType="tns:InvokeColegioEstudianteOperationRequest"/>
+    </variables>
+    <sequence>
+        <receive name="Receive1" createInstance="yes" partnerLink="PartnerLink1" operation="InvokeColegioEstudianteOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" portType="tns:InvokeColegioEstudiantePortType" variable="InvokeColegioEstudianteOperationIn"/>
+        <assign name="Assign1">
+            <copy>
+                <from variable="InvokeColegioEstudianteOperationIn" part="documento"/>
+                <to>$DarNombreEstudianteIn.parameters/documento</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke1" partnerLink="PartnerLink2" operation="darNombreEstudiante" xmlns:tns="http://serviciosSW/" portType="tns:ServicioColegioNombreSW" inputVariable="DarNombreEstudianteIn" outputVariable="DarNombreEstudianteOut"/>
+        <if name="If1">
+            <condition>'NN' != $DarNombreEstudianteOut.parameters/return</condition>
+            <sequence name="Sequence1">
+                <assign name="Assign3">
+                    <copy>
+                            <from variable="InvokeColegioEstudianteOperationIn" part="documento"/>
+                                <to>$DarNotaEstudianteIn.parameters/documento</to>
+                        </copy>
+                </assign>
+                <invoke name="Invoke2" partnerLink="PartnerLink3" operation="darNotaEstudiante" xmlns:tns="http://serviciosSW/" portType="tns:ServicioColegioNotaSW" inputVariable="DarNotaEstudianteIn" outputVariable="DarNotaEstudianteOut"/>
+                <assign name="Assign2">
+                    <copy>
+                            <from>concat('La nota del estudiante ', $DarNombreEstudianteOut.parameters/return, ' es: ', $DarNotaEstudianteOut.parameters/return)</from>
+                                <to variable="InvokeColegioEstudianteOperationOut" part="respuesta"/>
+                        </copy>
+                </assign>
+            </sequence>
+            <else>
+                <assign name="Assign4">
+                    <copy>
+                        <from>'No se ha encontrado el estudiante en la base de datos.'</from>
+                        <to variable="InvokeColegioEstudianteOperationOut" part="respuesta"/>
+                    </copy>
+                </assign>
+            </else>
+        </if>
+        <reply name="Reply1" partnerLink="PartnerLink1" operation="InvokeColegioEstudianteOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" portType="tns:InvokeColegioEstudiantePortType" variable="InvokeColegioEstudianteOperationOut"/>
+    </sequence>
+</process>

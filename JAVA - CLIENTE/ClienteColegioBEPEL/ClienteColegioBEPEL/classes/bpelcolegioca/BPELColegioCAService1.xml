@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns1="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname namespaceURI="BPELColegioCA" localpart="BPELColegioCAService1"/>
+      <port-info>
+         <wsdl-port namespaceURI="BPELColegioCA" localpart="casaPort1"/>
+         <runtime/>
+         <operations>
+            <operation name="invokeColegioEstudianteOperation"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

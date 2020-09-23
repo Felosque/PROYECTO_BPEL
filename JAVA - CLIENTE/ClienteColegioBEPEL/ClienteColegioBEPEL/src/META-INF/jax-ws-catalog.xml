@@ -1,0 +1,4 @@
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <system systemId="http://192.168.16.12:9080/BPELColegioCAService1/casaPort1?wsdl#%7BBPELColegioCA%7DBPELColegioCAService1"
+          uri="../bpelcolegioca/BPELColegioCAService1.wsdl"/>
+</catalog>

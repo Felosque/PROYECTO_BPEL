@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://192.168.16.12:7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort?WSDL" uri="../BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort.wsdl"/>
+    <system systemId="http://192.168.16.12:7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort?xsd=1" uri="../BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNombreSWPort.xsd_1.xsd"/>
+    <system systemId="http://192.168.16.12:7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort?WSDL" uri="../BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort.wsdl"/>
+    <system systemId="http://192.168.16.12:7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort?xsd=1" uri="../BPELColegio/192.168.16.12_7101/AplicacionColegioServidor-ProyectoColegioServidor-context-root/ServicioColegioNotaSWPort.xsd_1.xsd"/>
+</catalog>

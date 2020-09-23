@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://enterprise.netbeans.org/bpel/BPELColegio/BPELColegio" xmlns:ns2="http://serviciosSW/" xmlns:ns3="BPELColegioCA" xmlns:ns4="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/jbi ./jbi.xsd">
+    <service-assembly>
+        <identification>
+            <name>BPELColegioCA</name>
+            <description>Represents the Service Assembly of BPELColegioCA</description>
+        </identification>
+        <service-unit>
+            <identification>
+                <name>BPELColegioCA-BPELColegio</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>BPELColegio.jar</artifacts-zip>
+                <component-name>sun-bpel-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>BPELColegioCA-sun-http-binding</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>sun-http-binding.jar</artifacts-zip>
+                <component-name>sun-http-binding</component-name>
+            </target>
+        </service-unit>
+        <connections>
+            <connection>
+                <consumer endpoint-name="ServicioColegioNotaSWRole_partnerRole" service-name="ns1:PartnerLink3"/>
+                <provider endpoint-name="ServicioColegioNotaSWPort" service-name="ns2:ServicioColegioNotaSWService"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="casaPort1" service-name="ns3:BPELColegioCAService1"/>
+                <provider endpoint-name="InvokeColegioEstudiantePortTypeRole_myRole" service-name="ns1:PartnerLink1"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="ServicioColegioNombreSWRole_partnerRole" service-name="ns1:PartnerLink2"/>
+                <provider endpoint-name="ServicioColegioNombreSWPort" service-name="ns2:ServicioColegioNombreSWService"/>
+            </connection>
+        </connections>
+        <route-types xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <source endpoint-name="ServicioColegioNotaSWRole_partnerRole" mode="local" routing-rule="default" service-name="ns1:PartnerLink3">direct</source>
+            <source endpoint-name="casaPort1" mode="local" routing-rule="default" service-name="ns3:BPELColegioCAService1">direct</source>
+            <source endpoint-name="ServicioColegioNombreSWRole_partnerRole" mode="local" routing-rule="default" service-name="ns1:PartnerLink2">direct</source>
+        </route-types>
+        <interface-mapping xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <implementation>
+                <by-provider endpoint-name="InvokeColegioEstudiantePortTypeRole_myRole" service-name="ns1:PartnerLink1"/>
+                <interface name="ns4:InvokeColegioEstudiantePortType"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="ServicioColegioNotaSWPort" service-name="ns2:ServicioColegioNotaSWService"/>
+                <interface name="ns2:ServicioColegioNotaSW"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="ServicioColegioNombreSWPort" service-name="ns2:ServicioColegioNombreSWService"/>
+                <interface name="ns2:ServicioColegioNombreSW"/>
+            </implementation>
+        </interface-mapping>
+    </service-assembly>
+</jbi>

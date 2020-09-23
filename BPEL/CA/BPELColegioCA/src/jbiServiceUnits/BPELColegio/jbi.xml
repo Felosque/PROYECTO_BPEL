@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns0="http://enterprise.netbeans.org/bpel/BPELColegio/BPELColegio" xmlns:ns1="http://serviciosSW/" xmlns:ns2="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" xmlns:ns3="http://www.sun.com/jbi/descriptor/service-unit" version="1.0">
+    <services binding-component="false">
+        <provides endpoint-name="InvokeColegioEstudiantePortTypeRole_myRole" interface-name="ns2:InvokeColegioEstudiantePortType" service-name="ns0:PartnerLink1">
+            <ns3:display-name>PartnerLink1</ns3:display-name>
+            <ns3:process-name>BPELColegio</ns3:process-name>
+            <ns3:file-path>BPELColegio.bpel</ns3:file-path>
+        </provides>
+        <consumes endpoint-name="ServicioColegioNombreSWRole_partnerRole" interface-name="ns1:ServicioColegioNombreSW" service-name="ns0:PartnerLink2">
+            <ns3:display-name>PartnerLink2</ns3:display-name>
+            <ns3:process-name>BPELColegio</ns3:process-name>
+            <ns3:file-path>BPELColegio.bpel</ns3:file-path>
+        </consumes>
+        <consumes endpoint-name="ServicioColegioNotaSWRole_partnerRole" interface-name="ns1:ServicioColegioNotaSW" service-name="ns0:PartnerLink3">
+            <ns3:display-name>PartnerLink3</ns3:display-name>
+            <ns3:process-name>BPELColegio</ns3:process-name>
+            <ns3:file-path>BPELColegio.bpel</ns3:file-path>
+        </consumes>
+    </services>
+</jbi>

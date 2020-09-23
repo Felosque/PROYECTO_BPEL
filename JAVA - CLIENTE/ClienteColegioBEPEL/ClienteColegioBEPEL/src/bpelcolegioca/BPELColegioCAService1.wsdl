@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions targetNamespace="BPELColegioCA" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" xmlns:tns="BPELColegioCA" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <import namespace="http://j2ee.netbeans.org/wsdl/BPELColegio/src/InvokeColegioEstudiante" location="InvokeColegioEstudiante.wsdl">
+    </import>
+  <portType name="dummyCasaPortType">
+  </portType>
+  <binding name="casaBinding1" type="ns:InvokeColegioEstudiantePortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="InvokeColegioEstudianteOperation">
+      <soap:operation/>
+      <input name="input1">
+        <soap:body use="literal" namespace="BPELColegioCA"/>
+      </input>
+      <output name="output1">
+        <soap:body use="literal" namespace="BPELColegioCA"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="BPELColegioCAService1">
+    <port name="casaPort1" binding="tns:casaBinding1">
+      <soap:address location="http://U15280502325:9080/BPELColegioCAService1/casaPort1"/>
+    </port>
+  </service>
+</definitions>
